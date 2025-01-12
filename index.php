@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         input {
-            width: 100%;
+            width: 96%;
             padding: 10px;
             margin-bottom: 15px;
             border-radius: 5px;
