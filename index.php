@@ -30,6 +30,8 @@ function validateJWT($jwt) {
     }
 }
 
+$token = '';
+$decoded = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['generate'])) {
         $userId = $_POST['userId'];
@@ -135,10 +137,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <button type="submit" name="generate">Generate JWT</button>
     </form>
 
-    <?php if (isset($token)): ?>
+    <?php if (!empty($token)): ?>
         <div class="output">
             <h3>Generated Token:</h3>
-            <pre><?php echo $token; ?></pre>
+            <pre><?php echo htmlspecialchars($token); ?></pre>
             <h3>Decoded Payload:</h3>
             <pre><?php print_r($decoded); ?></pre>
         </div>
