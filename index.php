@@ -24,7 +24,7 @@ function validateJWT($jwt) {
 
     try {
         $decoded = JWT::decode($jwt, new Key($secretKey, 'HS256'));
-        return $decoded;
+        return (array) $decoded;  // Convert the decoded object to an associative array
     } catch (Exception $e) {
         return "Invalid Token: " . $e->getMessage();
     }
@@ -115,9 +115,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             border: 1px solid #ddd;
         }
 
-        .output pre {
-            margin: 0;
-            font-size: 14px;
+        .output label {
+            display: block;
+            margin: 10px 0 5px;
             color: #333;
         }
 
@@ -140,9 +140,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php if (!empty($token)): ?>
         <div class="output">
             <h3>Generated Token:</h3>
-            <pre><?php echo htmlspecialchars($token); ?></pre>
+            <div style="word-wrap: break-word;">Token: <?php echo htmlspecialchars($token); ?></div>
+            
             <h3>Decoded Payload:</h3>
-            <pre><?php print_r($decoded); ?></pre>
+            <?php if (is_array($decoded)): ?>
+                <label>User ID: <?php echo htmlspecialchars($decoded['user_id']); ?></label>
+                <label>Role: <?php echo htmlspecialchars($decoded['role']); ?></label>
+                <label>Issued At (iat): <?php echo date("Y-m-d H:i:s", $decoded['iat']); ?></label>
+                <label>Expiration Time (exp): <?php echo date("Y-m-d H:i:s", $decoded['exp']); ?></label>
+            <?php else: ?>
+                <label><?php echo htmlspecialchars($decoded); ?></label>
+            <?php endif; ?>
         </div>
     <?php endif; ?>
 </div>
