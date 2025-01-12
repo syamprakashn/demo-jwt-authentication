@@ -9,6 +9,9 @@ use Firebase\JWT\Key;
 // echo "Generated Secure Key: $secureKey\n";
 
 // Secret key for signing
+
+echo "Started jwt verification";
+
 $secretKey = '1039f7d5b26c76c045e937f01dee0fa8545b2022808daab21ad25dcc17946993';
 
 // Generate JWT
@@ -45,5 +48,8 @@ echo "Generated Token: $token\n";
 $decoded = validateJWT($token);
 echo "Decoded Payload:\n";
 print_r($decoded);
+
+echo "ending jwt validation";
+
 ?>
 
