@@ -1,0 +1,8 @@
+# Ignore vendor directory (Composer dependencies)
+/vendor/
+
+# Ignore Composer cache (optional, typically not needed for version control)
+/composer.phar
+
+# Optionally ignore composer.lock if you don't want to track versions of dependencies
+# composer.lock
